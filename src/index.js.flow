@@ -1,11 +1,11 @@
 // @flow strict
 type ExtractReturnType = <V>(() => V) => V;
 
-declare export function createToObject<TConverterMap>(
+declare export function toObject<TConverterMap>(
   converter: TConverterMap
 ): (value: mixed) => $ObjMap<TConverterMap, ExtractReturnType>;
 
-declare export function createToArray<TElement>(
+declare export function toArray<TElement>(
   converter: (value: mixed) => TElement
 ): (value: mixed) => Array<TElement>;
 

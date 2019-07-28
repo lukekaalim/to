@@ -1,7 +1,7 @@
 class ConvertError extends Error {
   constructor(value, message) {
-    this.value = value;
     super(message);
+    this.value = value;
   }
 }
 
@@ -19,9 +19,9 @@ class ValueWasNullError extends ConvertError {
 
 class PropertyError extends ConvertError {
   constructor(value, property, propertyError) {
+    super(value, `Error in property "${property}": ${propertyError.message}`);
     this.property = property;
     this.propertyError = propertyError;
-    super(value, `Error in property "${property}": ${propertyError.message}`);
   }
 }
 
@@ -54,9 +54,9 @@ class NotArrayError extends ConvertError {
 
 class ElementError extends ConvertError {
   constructor(value, index, indexError) {
+    super(value, `Error in index [${index}]: ${indexError.message}`);
     this.index = index;
     this.indexError = indexError;
-    super(value, `Error in index [${index}]: ${indexError.message}`);
   }
 }
 
