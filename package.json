@@ -14,5 +14,13 @@
   "directories": {
     "test": "test"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lukekaalim/to.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lukekaalim/to/issues"
+  },
+  "homepage": "https://github.com/lukekaalim/to#readme"
 }
