@@ -39,7 +39,7 @@ const toObject = (converter) => {
       try {
         obj[propertyName] = converter(value[propertyName]);
       } catch (error) {
-        throw new PropertyError(value, propertyName, error.message)
+        throw new PropertyError(value, propertyName, error)
       }
     }
     return obj;
