@@ -1,6 +1,6 @@
 {
   "name": "@lukekaalim/to",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A small library to help build typesafe object converters and checkers",
   "main": "src/index.js",
   "scripts": {
