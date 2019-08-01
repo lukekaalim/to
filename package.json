@@ -9,7 +9,7 @@
   "author": "lukekaalim",
   "license": "MIT",
   "devDependencies": {
-    "lk-test": "^3.2.0"
+    "lk-test": "^3.3.0"
   },
   "directories": {
     "test": "test"
