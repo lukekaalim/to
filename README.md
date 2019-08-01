@@ -39,13 +39,14 @@ Recursive object structure checking for typing those pesky models.
 
 ## API
 
-#### toString
+#### toAString
 ```javascript
-const { toString } = require('@lukekaalim/to');
+const { toAString } = require('@lukekaalim/to');
 
-const name = toString('luke'); // name === 'luke'
+const name = toAString('luke'); // name === 'luke'
 ```
 Identity if the value is a string, throw a `NotStringError` if not.
+Naming is seperate than other (Normall would be `toString`) but is different to avoid naming clashes with the standard `object.toString();` method
 
 #### toNumber
 ```javascript
