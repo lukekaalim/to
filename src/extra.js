@@ -1,12 +1,13 @@
 const to = require('./index');
 
+const tagListToString = tags => tags.map(tag => `"${tag}"`).join(', ');
+
 class UnknownUnionTagError extends to.ConvertError {
   constructor(value, tagName, expectedTags, unexpectedTag) {
-    const tagListString = expectedTags.map(tag => `"${tag}"`).join(', ');
     super(
       value,
       `Could not determine disjoint union on property ${tagName},` +
-      ` since "${unexpectedTag}" isn't included in the tag list: ${tagListString}`
+      ` since "${unexpectedTag}" isn't included in the tag list: ${tagListToString(expectedTags)}`
     );
     this.tagName = tagName;
   }
@@ -29,6 +30,25 @@ const toDisjointUnion = (tagName, converterMap) => {
   };
 };
 
+class UnknownUnionError extends to.ConvertError {
+  constructor(value, expectedTags) {
+    super(value, `Could not determine union since "${value}"` +
+    ` was not an expected tag: "${tagListToString(expectedTags)}"`);
+  }
+}
+
+const toUnion = (unionMap) => {
+  const tags = Object.keys(unionMap);
+  return (value) => {
+    const tag = to.toString(value);
+    if (!tags.includes(tag)) {
+      throw new UnknownUnionError(tag, tags);
+    }
+    return unionMap[tag];
+  };
+};
+
 module.exports = {
   toDisjointUnion,
+  toUnion,
 };
