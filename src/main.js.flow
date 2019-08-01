@@ -9,7 +9,7 @@ declare export function toArray<TElement>(
   converter: (value: mixed) => TElement
 ): (value: mixed) => Array<TElement>;
 
-declare export function toString(value: mixed): string;
+declare export function toAString(value: mixed): string;
 declare export function toNumber(value: mixed): number;
 declare export function toBoolean(value: mixed): boolean;
 

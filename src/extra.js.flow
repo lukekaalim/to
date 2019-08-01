@@ -1,5 +1,5 @@
 // @flow strict
-import { ConvertError } from '..';
+import { ConvertError } from './main';
 type ExtractReturnType = <V>(() => V) => V;
 
 declare export function toDisjointUnion<TConverterMap>(

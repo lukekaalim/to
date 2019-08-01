@@ -1,8 +1,8 @@
-const to = require('./index');
+const { toAString, ConvertError, NotAnObjectError, ValueWasNullError } = require('./main');
 
 const tagListToString = tags => tags.map(tag => `"${tag}"`).join(', ');
 
-class UnknownUnionTagError extends to.ConvertError {
+class UnknownUnionTagError extends ConvertError {
   constructor(value, tagName, expectedTags, unexpectedTag) {
     super(
       value,
@@ -17,10 +17,10 @@ const toDisjointUnion = (tagName, converterMap) => {
   const tags = Object.keys(converterMap);
   return (value) => {
     if (typeof value !== 'object') {
-      throw new to.NotAnObjectError(value);
+      throw new NotAnObjectError(value);
     }
     if (value === null) {
-      throw new to.ValueWasNullError();
+      throw new ValueWasNullError();
     }
     const tag = value[tagName];
     if (!tags.includes(tag)) {
@@ -30,7 +30,7 @@ const toDisjointUnion = (tagName, converterMap) => {
   };
 };
 
-class UnknownUnionError extends to.ConvertError {
+class UnknownUnionError extends ConvertError {
   constructor(value, expectedTags) {
     super(value, `Could not determine union since "${value}"` +
     ` was not an expected tag: "${tagListToString(expectedTags)}"`);
@@ -40,7 +40,7 @@ class UnknownUnionError extends to.ConvertError {
 const toUnion = (unionMap) => {
   const tags = Object.keys(unionMap);
   return (value) => {
-    const tag = to.toString(value);
+    const tag = toAString(value);
     if (!tags.includes(tag)) {
       throw new UnknownUnionError(tag, tags);
     }
