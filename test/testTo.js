@@ -1,6 +1,6 @@
 // @flow strict
 const { test, expect, expectTrue, assert, expectToThrowError } = require('lk-test');
-const { toAString, toNumber, toBoolean, toObject, toArray, NotStringError, NotNumberError, NotBooleanError } = require('../src/main');
+const { toAString, toNumber, toBoolean, toObject, toArray, NotStringError, NotNumberError, NotBooleanError } = require('..');
 
 const happyTests = test('Happy paths', async () => [
   expectTrue('toAString(): Expect to return the same string', toAString('test') === 'test'),
