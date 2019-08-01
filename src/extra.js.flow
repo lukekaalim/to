@@ -1,0 +1,7 @@
+// @flow strict
+type ExtractReturnType = <V>(() => V) => V;
+
+declare export function toDisjointUnion<TConverterMap>(
+  tagName: string,
+  converterMap: TConverterMap,
+): (value: mixed) => $Values<$ObjMap<TConverterMap, ExtractReturnType>>;

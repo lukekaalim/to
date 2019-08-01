@@ -28,7 +28,7 @@ const complexTest = test('Complex case:', async () => {
   ];
 });
 
-const toTest = test('@lukekaalim/to', async () => [
+const toTest = test('index tests', async () => [
   happyTests,
   errorTests,
   complexTest,
