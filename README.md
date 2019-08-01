@@ -1,5 +1,7 @@
 # `@lukekaalim/to`
 
+[![CircleCI](https://circleci.com/gh/lukekaalim/to.svg?style=svg)](https://circleci.com/gh/lukekaalim/to)
+
 There and ~~back again~~.
 
 ## Installation

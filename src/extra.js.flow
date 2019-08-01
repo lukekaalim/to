@@ -1,0 +1,20 @@
+// @flow strict
+import { ConvertError } from './main';
+type ExtractReturnType = <V>(() => V) => V;
+
+declare export function toDisjointUnion<TConverterMap>(
+  tagName: string,
+  converterMap: TConverterMap,
+): (value: mixed) => $Values<$ObjMap<TConverterMap, ExtractReturnType>>;
+
+declare export class UnknownUnionTagError extends ConvertError {
+  constructor(value: mixed, tagName: string, expectedTags: Array<string>, unexpectedTag: string): UnknownUnionTagError;
+}
+
+declare export function toUnion<T>(
+  unionMap: T,
+): (value: mixed) => $Values<$Call<typeof Object.freeze, T>>;
+
+declare export class UnknownUnionError extends ConvertError {
+  constructor(value: mixed, expectedTags: Array<string>, unexpectedTag: string): UnknownUnionError;
+}
