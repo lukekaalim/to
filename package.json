@@ -4,12 +4,14 @@
   "description": "A small library to help build typesafe object converters and checkers",
   "main": "src/index.js",
   "scripts": {
-    "test": "node test"
+    "test": "node test",
+    "test:coverage": "nyc node test"
   },
   "author": "lukekaalim",
   "license": "MIT",
   "devDependencies": {
-    "lk-test": "^3.3.0"
+    "lk-test": "^3.3.0",
+    "nyc": "^14.1.1"
   },
   "directories": {
     "test": "test"
