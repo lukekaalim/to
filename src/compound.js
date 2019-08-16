@@ -1,4 +1,4 @@
-const { ConvertError } = require('./main');
+const { ConvertError } = require('./primitive');
 
 class ValueWasNullError extends ConvertError {
   constructor() {

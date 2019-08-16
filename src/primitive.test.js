@@ -1,6 +1,6 @@
 // @flow strict
 const { expect, assert } = require('@lukekaalim/test');
-const { toAString } = require('./primitives');
+const { toAString } = require('./primitive');
 
 const stringTests = expect(() => (
   assert(

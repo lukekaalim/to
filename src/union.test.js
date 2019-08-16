@@ -1,7 +1,7 @@
 // @flow strict
 const { expectAll, test, expect, expectTrue, assert, expectToThrowError } = require('lk-test');
 const { toDisjointUnion, toUnion, UnknownUnionTagError, UnknownUnionError } = require('./union');
-const { ValueWasNullError, NotAnObjectError } = require('./main');
+const { ValueWasNullError, NotAnObjectError } = require('./compound');
 
 const disjointUnionTest = test('Disjoint Union', async () => {
   const toRed = ()/*: 'red'*/ => 'red';

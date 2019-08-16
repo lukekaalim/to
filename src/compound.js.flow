@@ -1,5 +1,5 @@
 // @flow strict
-import { ConvertError } from './primitives';
+import { ConvertError } from './primitive';
 type ExtractReturnType = <V>(() => V) => V;
 
 declare export function toObject<TConverterMap>(
