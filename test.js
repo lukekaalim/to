@@ -1,11 +1,11 @@
 // @flow strict
-const { toTest } = require('./test/testTo');
-const { extrasTest } = require('./src/extras.test');
-const { recursiveColorReporter, expectAll } = require('lk-test');
+const { stringTests } = require('./src/primitives.test');
+const { objectTests } = require('./src/compound.test');
+const { expectAll, colorReporter } = require('@lukekaalim/test');
 
 const main = async () => {
-  const assertion = await expectAll('@lukekaalim/to', [toTest, extrasTest]).test()
-  console.log(recursiveColorReporter(assertion));
+  const assertion = await expectAll('@lukekaalim/to', [stringTests, objectTests]).test()
+  console.log(colorReporter(assertion));
   process.exitCode = assertion.validatesExpectation ? 0 : 1;
 };
 

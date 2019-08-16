@@ -1,6 +1,7 @@
 // @flow strict
 const { expectAll, test, expect, expectTrue, assert, expectToThrowError } = require('lk-test');
 const { toDisjointUnion, toUnion, UnknownUnionTagError, UnknownUnionError } = require('./extra');
+const { ValueWasNullError, NotAnObjectError } = require('./main');
 
 const disjointUnionTest = test('Disjoint Union', async () => {
   const toRed = ()/*: 'red'*/ => 'red';
@@ -15,6 +16,8 @@ const disjointUnionTest = test('Disjoint Union', async () => {
     expectTrue('Union should switch color (blue)', toColor({ color: 'blue' }) === 'blue'),
     expectTrue('Union should switch color (red)', toColor({ color: 'red' }) === 'red'),
     expectToThrowError('Converter should throw if value is not in union', () => toColor({ color: 'green' }), UnknownUnionTagError),
+    expectToThrowError('Converter should throw if value is null', () => toColor(null), ValueWasNullError),
+    expectToThrowError('Converter should throw if value is not an object', () => toColor('a string literal'), NotAnObjectError),
   ];
 });
 
