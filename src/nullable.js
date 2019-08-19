@@ -1,14 +1,29 @@
 // @flow strict
+const { ConvertError } = require('./primitive');
 
-const toNullable = /*:: <TValue>*/(converter/*: mixed => TValue*/)/*: (mixed => TValue | null)*/ => {
+class NullableError extends ConvertError {
+  error/*: Error*/;
+
+  constructor(value/*: mixed*/, error/*: Error*/) {
+    super(value, `${error.message}\nError attempting to convert nullable`);
+    this.error = error;
+  }
+}
+
+const toNullable = /*:: <TValue>*/(converter/*: mixed => TValue*/)/*: (mixed => ?TValue)*/ => {
   return (value/*: mixed*/) => {
-    if (value === null) {
-      return value;
+    if (value === null || value === undefined) {
+      return null;
     }
-    return converter(value);
+    try {
+      return converter(value);
+    } catch (error) {
+      throw new NullableError(value, error);
+    }
   };
 };
 
 module.exports = {
+  NullableError,
   toNullable,
 };

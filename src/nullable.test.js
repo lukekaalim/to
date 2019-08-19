@@ -1,26 +1,37 @@
 // @flow strict
 const { toNullable } = require('./nullable');
-const { expect, assert } = require('@lukekaalim/test');
+const { expect, assert, expectToThrow, expectAll } = require('@lukekaalim/test');
 
-const nullableTest = expect(() => {
+const nullableShouldReturnNull = expect(() => {
   const toUser = () => 'user';
   const nullableUser = toNullable(toUser);
   return assert(
-    'nullableTest',
+    'toNullable should return null when given null',
     nullableUser(null) === null,
   );
 });
 
-const shouldReturnUser = expect(() => {
+const nullableShouldReturnUser = expect(() => {
   const toUser = () => 'user';
   const nullableUser = toNullable(toUser);
   return assert(
-    'shouldReturnUser',
+    'toNullable should pass the value to the converter when provided a valid value',
     nullableUser('user') === 'user',
   );
 });
 
+const nullableShouldPassError = expectToThrow('toNullable should throw any errors child converters throw', () => {
+  const toUser = () => { throw new Error('I always throw an Error') };
+  const toNullableUser = toNullable(toUser);
+  toNullableUser('dave the user');
+});
+
+const nullableExpectations = expectAll('toNullable', [
+  nullableShouldReturnNull,
+  nullableShouldReturnUser,
+  nullableShouldPassError,
+]);
+
 module.exports = {
-  nullableTest,
-  shouldReturnUser,
+  nullableExpectations
 };
