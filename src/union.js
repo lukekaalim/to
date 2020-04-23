@@ -1,4 +1,4 @@
-const { toAString, ConvertError, NotAnObjectError, ValueWasNullError } = require('./main');
+const { toAString, ConvertError, NotAnObjectError, ValueWasNullError } = require('./primitive');
 
 const tagListToString = tags => tags.map(tag => `"${tag}"`).join(', ');
 

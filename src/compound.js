@@ -1,7 +1,8 @@
-class ConvertError extends Error {
-  constructor(value, message) {
-    super(message);
-    this.value = value;
+const { ConvertError } = require('./primitive');
+
+class ValueWasNullError extends ConvertError {
+  constructor() {
+    super(null, 'Value was Null');
   }
 }
 
@@ -11,15 +12,9 @@ class NotAnObjectError extends ConvertError {
   }
 }
 
-class ValueWasNullError extends ConvertError {
-  constructor() {
-    super(null, 'Value was Null');
-  }
-}
-
 class PropertyError extends ConvertError {
   constructor(value, property, propertyError) {
-    super(value, `Error in property "${property}": ${propertyError.message}`);
+    super(value, `${propertyError.message}\nError in property "${property}"`);
     this.property = property;
     this.propertyError = propertyError;
   }
@@ -46,6 +41,7 @@ const toObject = (converter) => {
   };
 };
 
+
 class NotArrayError extends ConvertError {
   constructor(value) {
     super(value, 'Value was not an array');
@@ -54,7 +50,7 @@ class NotArrayError extends ConvertError {
 
 class ElementError extends ConvertError {
   constructor(value, index, indexError) {
-    super(value, `Error in index [${index}]: ${indexError.message}`);
+    super(value, `${indexError.message}\nError in index [${index}]`);
     this.index = index;
     this.indexError = indexError;
   }
@@ -77,62 +73,12 @@ const toArray = (toElement) => {
   };
 };
 
-class NotStringError extends ConvertError {
-  constructor(value) {
-    super(value, 'Value was not a string');
-  }
-}
-
-const toAString = (value) => {
-  if (typeof value !== 'string') {
-    throw new NotStringError();
-  }
-  return value;
-};
-
-class NotNumberError extends ConvertError {
-  constructor(value) {
-    super(value, 'Value was not a number');
-  }
-}
-
-const toNumber = (value) => {
-  if (typeof value !== 'number') {
-    throw new NotNumberError();
-  }
-  return value;
-};
-
-class NotBooleanError extends ConvertError {
-  constructor(value) {
-    super(value, 'Value was not a boolean');
-  }
-}
-
-const toBoolean = (value) => {
-  if (typeof value !== 'boolean') {
-    throw new NotBooleanError();
-  }
-  return value;
-};
-
-const errorClasses = {
-  ConvertError,
-  NotAnObjectError,
-  NotArrayError,
-  NotBooleanError,
-  NotNumberError,
-  NotStringError,
-  ValueWasNullError,
-  ElementError,
-  PropertyError,
-}
-
 module.exports = {
+  ValueWasNullError,
+  NotAnObjectError,
+  PropertyError,
+  NotArrayError,
+  ElementError,
   toObject,
   toArray,
-  toAString,
-  toNumber,
-  toBoolean,
-  ...errorClasses,
 };

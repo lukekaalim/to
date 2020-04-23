@@ -1,8 +1,8 @@
 // @flow strict
-const main = require('./main');
-const extra = require('./extra');
 
 module.exports = {
-  ...extra,
-  ...main,
-};
+  ...require('./compound'),
+  ...require('./primitive'),
+  ...require('./union'),
+  ...require('./nullable'),
+}

@@ -1,0 +1,22 @@
+// @flow strict
+import { ConvertError } from './primitive';
+type ExtractReturnType = <V>(() => V) => V;
+
+declare export function toObject<TConverterMap>(
+  converter: TConverterMap
+): (value: mixed) => $ObjMap<TConverterMap, ExtractReturnType>;
+
+declare export function toArray<TElement>(
+  converter: (value: mixed) => TElement
+): (value: mixed) => Array<TElement>;
+
+
+declare export class NotAnObjectError extends ConvertError {
+  constructor(value: mixed): NotAnObjectError;
+}
+declare export class NotArrayError extends ConvertError {
+  constructor(value: mixed): NotArrayError;
+}
+declare export class ValueWasNullError extends ConvertError {
+  constructor(): ValueWasNullError;
+}
